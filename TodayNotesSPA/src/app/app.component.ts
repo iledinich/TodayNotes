@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { AuthService } from './_services/auth.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 @Component({
@@ -7,14 +9,15 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'TodayNotesSPA';
-  notes: any;
+export class AppComponent implements OnInit {
+  jwtHelper = new JwtHelperService();
 
-  constructor(private http: HttpClient) {
-    // this.http.get('http://localhost:5000/api/values').subscribe(resp => {
-    //   this.notes = resp;
-    //   console.log(this.notes);
-    // });
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.authService.decodedToken = this.jwtHelper.decodeToken(token);
+    }
   }
 }

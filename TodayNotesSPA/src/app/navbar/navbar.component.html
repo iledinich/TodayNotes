@@ -6,6 +6,6 @@
     <button [disabled]="!loginForm.valid" class="btn btn-dark my-2 my-sm-0" type="submit">Login</button>
   </form>
   <div *ngIf="loggedIn()">
-    <span class="text-white">Welcome USER </span><button class="btn btn-dark my-2 my-sm-0" (click)="logout()">Logout</button>
+    <span class="text-white">Welcome {{auth.decodedToken?.unique_name}} </span><button class="btn btn-dark my-2 my-sm-0" (click)="logout()">Logout</button>
   </div>
 </nav>
