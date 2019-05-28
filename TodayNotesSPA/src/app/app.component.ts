@@ -12,9 +12,9 @@ export class AppComponent {
   notes: any;
 
   constructor(private http: HttpClient) {
-    this.http.get('http://localhost:5000/api/values').subscribe(resp => {
-      this.notes = resp;
-      console.log(this.notes);
-    });
+    // this.http.get('http://localhost:5000/api/values').subscribe(resp => {
+    //   this.notes = resp;
+    //   console.log(this.notes);
+    // });
   }
 }

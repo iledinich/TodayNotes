@@ -1,0 +1,7 @@
+<!-- If the user is logged then I'll show INFO, If not Ill show the register page -->
+<nav *ngIf="loggedIn()">
+  Muestro la magica info.
+</nav>
+<nav *ngIf="!loggedIn()">
+  <app-register></app-register>
+</nav>
