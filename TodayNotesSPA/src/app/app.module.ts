@@ -11,23 +11,32 @@ import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptor, ErrorInterceptorProvider } from './_services/error.interceptor';
 import { AuthService } from './_services/auth.service';
 import { AlertifyService } from './_services/alertify.service';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { SigninComponent } from './signin/signin.component';
+import { RouterModule } from '@angular/router';
+import { appRoutes } from './route.routing';
+import { AuthGuard } from './_services/_guards/auth.guard';
 
 @NgModule({
    declarations: [
       AppComponent,
       NavbarComponent,
       HomeComponent,
-      RegisterComponent
+      RegisterComponent,
+      WelcomeComponent,
+      SigninComponent
    ],
    imports: [
       BrowserModule,
       HttpClientModule,
-      FormsModule
+      FormsModule,
+      RouterModule.forRoot(appRoutes)
    ],
    providers: [
       AuthService,
       ErrorInterceptorProvider,
-      AlertifyService
+      AlertifyService,
+      AuthGuard
    ],
    bootstrap: [
       AppComponent

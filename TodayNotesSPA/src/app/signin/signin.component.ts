@@ -4,11 +4,11 @@ import { AlertifyService } from '../_services/alertify.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  selector: 'app-signin',
+  templateUrl: './signin.component.html',
+  styleUrls: ['./signin.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class SigninComponent implements OnInit {
 
   model: any = {};
 
@@ -17,14 +17,23 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  login() {
+    this.auth.login(this.model).subscribe(next => {
+      this.alertify.success('Logged in successfully');
+      this.router.navigate(['/home']);
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
+
   loggedIn() {
     return this.auth.loggedIn();
   }
 
   logout() {
-    this.router.navigate(['/welcome']);
     localStorage.removeItem('token');
     this.alertify.message('logged out');
 
   }
+
 }
