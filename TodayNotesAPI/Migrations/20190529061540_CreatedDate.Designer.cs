@@ -9,8 +9,8 @@ using TodayNotesAPI.Data;
 namespace TodayNotesAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190527062423_UserModified")]
-    partial class UserModified
+    [Migration("20190529061540_CreatedDate")]
+    partial class CreatedDate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,9 +23,15 @@ namespace TodayNotesAPI.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("Created");
+
                     b.Property<string>("Text");
 
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Notes");
                 });
@@ -44,6 +50,14 @@ namespace TodayNotesAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("TodayNotesAPI.Models.Note", b =>
+                {
+                    b.HasOne("TodayNotesAPI.Models.User")
+                        .WithMany("Notes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

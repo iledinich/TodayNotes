@@ -37,6 +37,8 @@ namespace TodayNotesAPI
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IAuthRepository,AuthRepository>();
             services.AddCors();
+            services.AddTransient<Seed>();
+            services.AddScoped<INotesRepository, NotesRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters
@@ -52,7 +54,7 @@ namespace TodayNotesAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())
             {
@@ -73,6 +75,8 @@ namespace TodayNotesAPI
                     });
                 });
             }
+
+            seeder.SeedUsers();
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseAuthentication();
             // app.UseHttpsRedirection();

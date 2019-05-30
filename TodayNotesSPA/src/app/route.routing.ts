@@ -3,7 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { RegisterComponent } from './register/register.component';
 import { SigninComponent } from './signin/signin.component';
-import { AuthGuard } from './_services/_guards/auth.guard';
+import { AuthGuard } from './_guards/auth.guard';
 
 export const appRoutes: Routes = [
   { path: 'home', component: HomeComponent, canActivate : [AuthGuard] },

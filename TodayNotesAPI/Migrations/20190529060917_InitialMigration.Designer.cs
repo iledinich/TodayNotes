@@ -9,8 +9,8 @@ using TodayNotesAPI.Data;
 namespace TodayNotesAPI.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190527061033_UserModel")]
-    partial class UserModel
+    [Migration("20190529060917_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,7 +25,11 @@ namespace TodayNotesAPI.Migrations
 
                     b.Property<string>("Text");
 
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Notes");
                 });
@@ -35,7 +39,7 @@ namespace TodayNotesAPI.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<byte[]>("Password");
+                    b.Property<byte[]>("PasswordHash");
 
                     b.Property<byte[]>("PasswordSalt");
 
@@ -44,6 +48,14 @@ namespace TodayNotesAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("TodayNotesAPI.Models.Note", b =>
+                {
+                    b.HasOne("TodayNotesAPI.Models.User")
+                        .WithMany("Notes")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

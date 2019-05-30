@@ -15,7 +15,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { SigninComponent } from './signin/signin.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './route.routing';
-import { AuthGuard } from './_services/_guards/auth.guard';
+import { AuthGuard } from './_guards/auth.guard';
 
 @NgModule({
    declarations: [
