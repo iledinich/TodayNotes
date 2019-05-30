@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using TodayNotesAPI.DTOs;
 using TodayNotesAPI.Models;
 
 namespace TodayNotesAPI.Data
@@ -9,6 +11,7 @@ namespace TodayNotesAPI.Data
     public class NotesRepository : INotesRepository
     {
         private readonly DataContext _context;
+
         public NotesRepository(DataContext context)
         {
             _context = context;

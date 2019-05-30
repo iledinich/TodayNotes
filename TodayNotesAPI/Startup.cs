@@ -19,6 +19,7 @@ using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using TodayNotesAPI.Helpers;
+using AutoMapper;
 
 namespace TodayNotesAPI
 {
@@ -38,6 +39,7 @@ namespace TodayNotesAPI
             services.AddScoped<IAuthRepository,AuthRepository>();
             services.AddCors();
             services.AddTransient<Seed>();
+            services.AddAutoMapper(typeof(Startup));
             services.AddScoped<INotesRepository, NotesRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
