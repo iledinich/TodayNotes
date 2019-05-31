@@ -1,1 +1,9 @@
-<p>Aca muestro todo lo de las notas...</p>
+<div>
+
+    Here I'll show the notes
+
+    <div *ngFor="let note of notes">
+        <app-note-card [note]="note"></app-note-card>
+    </div>
+
+</div>

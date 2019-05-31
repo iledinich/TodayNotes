@@ -4,9 +4,10 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { RegisterComponent } from './register/register.component';
 import { SigninComponent } from './signin/signin.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { NotesResolver } from './_resolvers/notes.resolver';
 
 export const appRoutes: Routes = [
-  { path: 'home', component: HomeComponent, canActivate : [AuthGuard] },
+  { path: 'home', component: HomeComponent, canActivate : [AuthGuard], resolve: {notes: NotesResolver}  },
   { path: 'welcome', component: WelcomeComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'signin', component: SigninComponent },

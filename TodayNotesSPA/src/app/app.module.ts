@@ -16,6 +16,14 @@ import { SigninComponent } from './signin/signin.component';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './route.routing';
 import { AuthGuard } from './_guards/auth.guard';
+import { NoteCardComponent } from './note-card/note-card.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { NotesResolver } from './_resolvers/notes.resolver';
+
+
+export function tokenGetter() {
+   return localStorage.getItem('token');
+ }
 
 @NgModule({
    declarations: [
@@ -24,19 +32,28 @@ import { AuthGuard } from './_guards/auth.guard';
       HomeComponent,
       RegisterComponent,
       WelcomeComponent,
-      SigninComponent
+      SigninComponent,
+      NoteCardComponent
    ],
    imports: [
       BrowserModule,
       HttpClientModule,
       FormsModule,
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      JwtModule.forRoot({
+         config: {
+           tokenGetter: tokenGetter,
+           whitelistedDomains: ['localhost:5000'],
+           blacklistedRoutes: ['localhost:5000/api/auth']
+         }
+       })
    ],
    providers: [
       AuthService,
       ErrorInterceptorProvider,
       AlertifyService,
-      AuthGuard
+      AuthGuard,
+      NotesResolver
    ],
    bootstrap: [
       AppComponent

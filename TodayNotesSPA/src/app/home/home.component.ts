@@ -1,20 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../_services/auth.service';
+import { NoteService } from '../_services/note.service';
+import { Note } from '../_models/note';
+import { AlertifyService } from '../_services/alertify.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit{
 
-  constructor(private authService: AuthService) { }
+  notes: Note[];
 
-  isLogged: false;
   ngOnInit() {
+    this.route.data.subscribe(data => {
+      this.notes = data['notes'];
+    });
   }
-  loggedIn() {
-    return this.isLogged;
+  constructor(private noteService: NoteService, private alertify: AlertifyService,
+    private route: ActivatedRoute) {
   }
 
 }
