@@ -20,6 +20,10 @@ import { NoteCardComponent } from './note-card/note-card.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NotesResolver } from './_resolvers/notes.resolver';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { EditNoteComponent } from './edit-note/edit-note.component';
+import { NoteEditResolver } from './_resolvers/edit.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { ColorPickerComponent } from './color-picker/color-picker.component';
 
 
 export function tokenGetter() {
@@ -34,7 +38,9 @@ export function tokenGetter() {
       RegisterComponent,
       WelcomeComponent,
       SigninComponent,
-      NoteCardComponent
+      NoteCardComponent,
+      ColorPickerComponent,
+      EditNoteComponent
    ],
    imports: [
       BrowserModule,
@@ -55,7 +61,9 @@ export function tokenGetter() {
       ErrorInterceptorProvider,
       AlertifyService,
       AuthGuard,
-      NotesResolver
+      PreventUnsavedChanges,
+      NotesResolver,
+      NoteEditResolver
    ],
    bootstrap: [
       AppComponent

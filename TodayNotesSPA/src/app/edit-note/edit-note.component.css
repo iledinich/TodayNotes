@@ -1,0 +1,11 @@
+.buttons{
+    text-align: right;
+}
+
+.buttons button{
+    margin: 5px;
+    margin-top: 0;
+}
+textarea {
+    resize: none;
+  }

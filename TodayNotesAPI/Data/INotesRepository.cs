@@ -8,9 +8,8 @@ namespace TodayNotesAPI.Data
     {
         Task<IEnumerable<Note>> GetNotes(int userId);
         Task<Note> GetNote(int noteId);
-        void AddNote(Note note);
-        void DeleteNote(Note note);
-        void UpdateNote(int id, Note note);
-        Task<bool> SaveChanges();
+        void Add(Note note);
+        void Delete(Note note);
+        Task<bool> SaveAll();
     }
 }

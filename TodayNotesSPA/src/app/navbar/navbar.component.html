@@ -1,5 +1,5 @@
 <nav class="navbar justify-content-end bg-light">
-  <a class="navbar-brand">TodayNotes</a>
+  <a class="navbar-brand" [routerLink]="['/home']">TodayNotes</a>
   <div *ngIf="!loggedIn()" class="d-none d-md-block">
       <button type="button" [routerLink]="['/signin']"
       routerLinkActive="router-link-active" 
@@ -13,9 +13,10 @@
     </a>
     <div class="dropdown-menu mt-3" *dropdownMenu>
             <a class="dropdown-item" (click)="settings()">
-                <i class="fa fa-user"></i>settings</a>
+                <i class="fa fa-user"></i> Settings</a>
+            <div class="dropdown-divider"></div>
             <a class="dropdown-item" (click)="logout()">
-                <i class="fa fa-sign-out"></i>logout</a>
+                <i class="fa fa-sign-out"></i> Logout</a>
     </div>
   </div>
 

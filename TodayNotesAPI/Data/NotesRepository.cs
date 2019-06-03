@@ -16,12 +16,12 @@ namespace TodayNotesAPI.Data
         {
             _context = context;
         }
-        public void AddNote(Note note)
+        public void Add(Note note)
         {
             _context.Add(note);
         }
 
-        public void DeleteNote(Note note)
+        public void Delete(Note note)
         {
             _context.Remove(note);
         }
@@ -36,14 +36,9 @@ namespace TodayNotesAPI.Data
             return await _context.Notes.Where(u=>u.UserId == userId).ToListAsync();
         }
 
-        public async Task<bool> SaveChanges()
+        public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
-        }
-
-        public void UpdateNote(int id, Note note)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

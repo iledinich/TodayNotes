@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -34,13 +35,35 @@ namespace TodayNotesAPI.Controllers
         [HttpGet("notes/{idUser}")]
         public async Task<IActionResult> GetNotes(int idUser)
         {
-            if(idUser != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)){
+            if (idUser != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            {
                 return Unauthorized();
             }
 
             var notes = await _repo.GetNotes(idUser);
             var notesForReturn = _mapper.Map<IEnumerable<NoteForReturn>>(notes);
             return Ok(notesForReturn);
+        }
+
+        [HttpPut("{idNote}")]
+        public async Task<IActionResult> UpdateNote(int idNote, NoteForUpdateDTO noteToUpdate)
+        {
+
+            //I need to check if the user have permisions to modify that note.
+            var noteFromRepo = await _repo.GetNote(idNote);
+
+            if (noteFromRepo.UserId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+
+
+            _mapper.Map(noteToUpdate, noteFromRepo);
+            noteFromRepo.Created = DateTime.Now;
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception($"Updating note {idNote} failed on save");
         }
 
     }

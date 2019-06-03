@@ -20,4 +20,8 @@ constructor(private http: HttpClient) { }
     return this.http.get<Note>(this.baseUrl + 'notes/note/' + noteId);
   }
 
+  updateNote(noteId: number, note: Note) {
+    return this.http.put<Note>(this.baseUrl + 'notes/' + noteId, note);
+  }
+
 }

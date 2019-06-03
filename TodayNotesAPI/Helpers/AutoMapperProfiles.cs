@@ -11,6 +11,8 @@ namespace TodayNotesAPI.Helpers
                 .ForMember(dest => dest.DaysAgo, opt =>{
                     opt.MapFrom(source => source.Created.DaysAgoCalculator());
                 });
+
+            CreateMap<NoteForUpdateDTO,Note>();
         }
     }
 }
