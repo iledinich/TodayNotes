@@ -1,0 +1,11 @@
+.dropdown-toggle, .dropdown-item {
+    cursor: pointer;
+}
+
+.navbar-brand{
+
+    margin-right: auto;
+    padding-left: 3px;
+    font-weight: bold;
+    color: dodgerblue !important;
+}

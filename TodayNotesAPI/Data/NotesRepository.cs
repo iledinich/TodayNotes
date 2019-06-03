@@ -26,9 +26,9 @@ namespace TodayNotesAPI.Data
             _context.Remove(note);
         }
 
-        public async Task<Note> GetNote(int noteId)
+        public async Task<Note> GetNote(int id)
         {
-            return await _context.Notes.FirstOrDefaultAsync(n=>n.Id == noteId);
+            return await _context.Notes.FirstOrDefaultAsync(n=>n.Id == id);
         }
 
         public async Task<IEnumerable<Note>> GetNotes(int userId)

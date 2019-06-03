@@ -1,16 +1,22 @@
 <nav class="navbar justify-content-end bg-light">
-  <a class="navbar-brand mr-auto pl-3 font-weight-bold" href="#">TodayNotes</a>
-  <div *ngIf="!loggedIn()">
+  <a class="navbar-brand">TodayNotes</a>
+  <div *ngIf="!loggedIn()" class="d-none d-md-block">
       <button type="button" [routerLink]="['/signin']"
       routerLinkActive="router-link-active" 
       class="btn btn-primary pr-5 pl-5 mr-2">Sign in</button>
     <button type="button" [routerLink]="['/register']"
     class="btn btn-outline-primary p-2">Create an account</button>
   </div>
-  <div *ngIf="loggedIn()">
-    <span>Welcome {{this.auth.decodedToken?.unique_name}}</span>
-    <button type="button" (click)="logout()"
-    class="btn btn-outline-primary ml-3 p-2">Logout</button>
+  <div *ngIf="loggedIn()" class="dropdown mr-3" dropdown>
+    <a dropdownToggle class="dropdown-toggle">
+      Welcome {{this.auth.decodedToken?.unique_name | titlecase}}
+    </a>
+    <div class="dropdown-menu mt-3" *dropdownMenu>
+            <a class="dropdown-item" (click)="settings()">
+                <i class="fa fa-user"></i>settings</a>
+            <a class="dropdown-item" (click)="logout()">
+                <i class="fa fa-sign-out"></i>logout</a>
+    </div>
   </div>
 
 </nav>

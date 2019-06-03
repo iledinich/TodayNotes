@@ -27,4 +27,8 @@ export class NavbarComponent implements OnInit {
     this.alertify.message('logged out');
 
   }
+
+  settings() {
+    this.alertify.message('settings is under develop');
+  }
 }

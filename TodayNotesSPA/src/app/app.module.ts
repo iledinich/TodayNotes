@@ -19,6 +19,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { NoteCardComponent } from './note-card/note-card.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NotesResolver } from './_resolvers/notes.resolver';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 
 export function tokenGetter() {
@@ -46,7 +47,8 @@ export function tokenGetter() {
            whitelistedDomains: ['localhost:5000'],
            blacklistedRoutes: ['localhost:5000/api/auth']
          }
-       })
+       }),
+       BsDropdownModule.forRoot()
    ],
    providers: [
       AuthService,

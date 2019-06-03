@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -33,6 +34,10 @@ namespace TodayNotesAPI.Controllers
         [HttpGet("notes/{idUser}")]
         public async Task<IActionResult> GetNotes(int idUser)
         {
+            if(idUser != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value)){
+                return Unauthorized();
+            }
+
             var notes = await _repo.GetNotes(idUser);
             var notesForReturn = _mapper.Map<IEnumerable<NoteForReturn>>(notes);
             return Ok(notesForReturn);
