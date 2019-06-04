@@ -17,3 +17,8 @@
 .title-user{
     color: white !important;
 }
+
+.darkmenu{
+    background-color: RGB(73,73,73);
+    color: white;
+}

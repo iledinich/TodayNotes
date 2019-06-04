@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NoteService } from '../_services/note.service';
 import { AlertifyService } from '../_services/alertify.service';
 import { NgForm } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-edit-note',
@@ -15,6 +16,7 @@ export class EditNoteComponent implements OnInit {
   note: Note;
   newMode = false;
   colorHasChanged = false;
+  defaultColor = environment.colors[0];
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -32,7 +34,7 @@ export class EditNoteComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       if (data['note'] === undefined) {
-        this.note = { id: 0, title: '', text: '', daysAgo: 0, color: 'white' };
+        this.note = { id: 0, title: '', text: '', daysAgo: 0, color: this.defaultColor };
         this.newMode = true;
       } else {
         this.note = data['note'];

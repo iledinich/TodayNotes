@@ -1,4 +1,5 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-color-picker',
@@ -9,12 +10,13 @@ export class ColorPickerComponent implements OnInit {
 
   @Output() changeColorEmmiter = new EventEmitter();
   @Input() noteColor: string;
-  colors: string[] = ['dodgerblue', 'violet', 'salmon', 'navajowhite', 'white'];
+  colors = environment.colors;
   selectedColor: string;
+
   constructor() { }
 
   ngOnInit() {
-    this.selectedColor = this.noteColor != null ? this.noteColor : 'white';
+    this.selectedColor = this.noteColor != null ? this.noteColor : this.colors[0];
   }
 
   changeColor(color: string) {

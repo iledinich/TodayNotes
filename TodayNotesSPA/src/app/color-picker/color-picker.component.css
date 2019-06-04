@@ -1,6 +1,5 @@
 .dot-container{
     display: flex;
-    border: 1px solid #ced4da;
     padding: 5px;
     justify-content: flex-end;
     margin-bottom: 10px;
