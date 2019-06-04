@@ -9,3 +9,11 @@
     font-weight: bold;
     color: dodgerblue !important;
 }
+
+.navbar{
+    background-color: RGB(45,45,45);
+}
+
+.title-user{
+    color: white !important;
+}

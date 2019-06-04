@@ -11,12 +11,16 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./edit-note.component.css']
 })
 export class EditNoteComponent implements OnInit {
-
   @ViewChild('editForm') editForm: NgForm;
   note: Note;
+  newMode = false;
   colorHasChanged = false;
-  constructor(private route: ActivatedRoute, private router: Router,
-     private noteService: NoteService, private alertify: AlertifyService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private noteService: NoteService,
+    private alertify: AlertifyService
+  ) {}
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
@@ -27,33 +31,59 @@ export class EditNoteComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.note = data['note'];
+      if (data['note'] === undefined) {
+        this.note = { id: 0, title: '', text: '', daysAgo: 0, color: 'white' };
+        this.newMode = true;
+      } else {
+        this.note = data['note'];
+      }
     });
   }
 
-  updateNote() {
-    this.noteService.updateNote(this.note.id, this.note).subscribe(next => {
-      this.router.navigate(['/home']);
-      this.alertify.success('Note updated successfully');
-      this.editForm.reset(this.note);
-      this.colorHasChanged = false;
-    }, error => {
-      this.alertify.error(error);
-    });
+  addOrUpdateNote() {
+
+    if (this.newMode) {
+      this.noteService.addNote(this.note).subscribe(
+        next => {
+          this.router.navigate(['/home']);
+          this.alertify.success('Note created successfully');
+          this.editForm.reset(this.note);
+          this.colorHasChanged = false;
+        },
+        error => {
+          this.alertify.error(error);
+        }
+      );
+    } else {
+      this.noteService.updateNote(this.note.id, this.note).subscribe(
+        next => {
+          this.router.navigate(['/home']);
+          this.alertify.success('Note updated successfully');
+          this.editForm.reset(this.note);
+          this.colorHasChanged = false;
+        },
+        error => {
+          this.alertify.error(error);
+        }
+      );
+    }
+
   }
 
   deleteNote() {
-    this.noteService.deleteNote(this.note.id).subscribe(next => {
-      this.router.navigate(['/home']);
-      this.alertify.success('Note deleted successfully');
-    }, error => {
-      this.alertify.error(error);
-    });
+    this.noteService.deleteNote(this.note.id).subscribe(
+      next => {
+        this.router.navigate(['/home']);
+        this.alertify.success('Note deleted successfully');
+      },
+      error => {
+        this.alertify.error(error);
+      }
+    );
   }
 
   changeColorNote(newColor: string) {
     this.note.color = newColor;
     this.colorHasChanged = true;
   }
-
 }

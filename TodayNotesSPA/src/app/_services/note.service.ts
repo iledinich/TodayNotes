@@ -24,6 +24,10 @@ constructor(private http: HttpClient) { }
     return this.http.put<Note>(this.baseUrl + 'notes/' + noteId, note);
   }
 
+  addNote(note: Note) {
+    return this.http.post((this.baseUrl + 'notes/'), note);
+  }
+
   deleteNote(noteId: number) {
     return this.http.delete<Note>(this.baseUrl + 'notes/' + noteId);
   }

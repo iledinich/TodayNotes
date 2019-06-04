@@ -24,6 +24,7 @@ import { EditNoteComponent } from './edit-note/edit-note.component';
 import { NoteEditResolver } from './_resolvers/edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { ColorPickerComponent } from './color-picker/color-picker.component';
+import { AddButtonComponent } from './add-button/add-button.component';
 
 
 export function tokenGetter() {
@@ -40,7 +41,8 @@ export function tokenGetter() {
       SigninComponent,
       NoteCardComponent,
       ColorPickerComponent,
-      EditNoteComponent
+      EditNoteComponent,
+      AddButtonComponent
    ],
    imports: [
       BrowserModule,

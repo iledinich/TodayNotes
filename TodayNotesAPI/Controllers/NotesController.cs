@@ -61,6 +61,23 @@ namespace TodayNotesAPI.Controllers
             throw new Exception($"Updating note {idNote} failed on save");
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AddNote(NoteForUpdateDTO noteCreated)
+        {            
+            Note noteToRepo = new Note();
+            _mapper.Map(noteCreated, noteToRepo);
+
+            noteToRepo.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
+            noteToRepo.Created = DateTime.Today;
+
+            _repo.Add(noteToRepo);
+
+            if (await _repo.SaveAll())
+                return NoContent();
+
+            throw new Exception("An error ocurred creating the new note");
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteNote(int id){
             //I need to check if the user have permisions to modify that note.
@@ -74,7 +91,7 @@ namespace TodayNotesAPI.Controllers
             if (await _repo.SaveAll())
                 return Ok();
 
-            return BadRequest("Failed to delete the photo");
+            return BadRequest("Failed to delete the note");
 
         }
 

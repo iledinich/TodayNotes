@@ -15,5 +15,6 @@ export const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'signin', component: SigninComponent },
   { path: 'edit/:id', component: EditNoteComponent, canDeactivate: [PreventUnsavedChanges], resolve: {note: NoteEditResolver}},
+  { path: 'new', component: EditNoteComponent, canDeactivate: [PreventUnsavedChanges]},
   { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
 ];

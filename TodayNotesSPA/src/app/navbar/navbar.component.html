@@ -1,4 +1,4 @@
-<nav class="navbar justify-content-end bg-light">
+<nav class="navbar justify-content-end">
   <a class="navbar-brand" [routerLink]="['/home']">TodayNotes</a>
   <div *ngIf="!loggedIn()" class="d-none d-md-block">
       <button type="button" [routerLink]="['/signin']"
@@ -8,7 +8,7 @@
     class="btn btn-outline-primary p-2">Create an account</button>
   </div>
   <div *ngIf="loggedIn()" class="dropdown mr-3" dropdown>
-    <a dropdownToggle class="dropdown-toggle">
+    <a dropdownToggle class="dropdown-toggle title-user">
       Welcome {{this.auth.decodedToken?.unique_name | titlecase}}
     </a>
     <div class="dropdown-menu mt-3" *dropdownMenu>

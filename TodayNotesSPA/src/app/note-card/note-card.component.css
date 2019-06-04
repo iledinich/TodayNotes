@@ -1,5 +1,9 @@
 .card-date{
     font-size: 13px;
-    color: dimgray;
+    color: black;
     text-align: right;
+}
+
+.card-body{
+    padding-bottom: 0px
 }

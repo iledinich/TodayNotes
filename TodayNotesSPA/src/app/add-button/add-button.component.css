@@ -1,0 +1,24 @@
+.addNote{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: dodgerblue;
+    position: fixed;
+    bottom: 0px;
+    right: 0px; 
+    margin: 25px;
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    background:white;
+    box-shadow: 2px 1px dodgerblue;
+    cursor: pointer;
+
+}
+
+.fa{
+    text-align: center;
+}
+
+
+background-color: RGB(51,54,57);
