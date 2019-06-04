@@ -12,14 +12,21 @@ import { ActivatedRoute } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   notes: Note[];
+  filteredNotes: Note[];
 
   ngOnInit() {
     this.route.data.subscribe(data => {
       this.notes = data['notes'];
+      this.filteredNotes = this.notes;
     });
   }
   constructor(private noteService: NoteService, private alertify: AlertifyService,
     private route: ActivatedRoute) {
   }
 
+  filter(word: string) {
+    this.filteredNotes = this.notes.filter(n => {
+      return n.title.toLocaleLowerCase().includes(word.toLocaleLowerCase());
+    });
+  }
 }

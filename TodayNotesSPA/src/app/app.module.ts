@@ -26,6 +26,7 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { ColorPickerComponent } from './color-picker/color-picker.component';
 import { AddButtonComponent } from './add-button/add-button.component';
 import {TimeAgoPipe} from 'time-ago-pipe';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 
 
 export function tokenGetter() {
@@ -44,7 +45,8 @@ export function tokenGetter() {
       ColorPickerComponent,
       EditNoteComponent,
       AddButtonComponent,
-      TimeAgoPipe
+      TimeAgoPipe,
+      SearchBarComponent
    ],
    imports: [
       BrowserModule,

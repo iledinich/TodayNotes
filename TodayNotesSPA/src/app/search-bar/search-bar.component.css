@@ -1,0 +1,18 @@
+.search-nav{
+    padding: 10px;
+}
+
+input {
+    width: 100%;
+    border: none;
+    padding: 8px;
+    margin-top: 8px;
+    padding-left: 10px;
+    border-radius: 10px;
+    background-color: RGB(45,45,45);
+    color: gray;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}

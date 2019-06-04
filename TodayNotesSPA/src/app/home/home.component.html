@@ -1,5 +1,6 @@
+<app-search-bar (searchedWordEmitter)="filter($event)" ></app-search-bar>
 <div class="note-container">
-        <app-note-card class="card" *ngFor="let note of notes" [note]="note"></app-note-card>
+        <app-note-card class="card" *ngFor="let note of filteredNotes" [note]="note"></app-note-card>
 </div>
 <app-add-button></app-add-button>
 
