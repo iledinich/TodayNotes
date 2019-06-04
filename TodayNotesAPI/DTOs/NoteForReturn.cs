@@ -1,3 +1,5 @@
+using System;
+
 namespace TodayNotesAPI.DTOs
 {
     public class NoteForReturn
@@ -6,6 +8,6 @@ namespace TodayNotesAPI.DTOs
         public string Title { get; set; }
         public string Text { get; set; }
         public string Color { get; set; }
-        public int DaysAgo { get; set; }
+        public DateTime Created { get; set; }
     }
 }

@@ -7,3 +7,11 @@
 body{
     background-color: RGB(30,30,30);
 }
+
+  .alertify-notifier .ajs-message.ajs-success {
+    background: rgba(59, 112, 71, 0.95);
+  }
+  .alertify-notifier .ajs-message.ajs-error {
+    background: rgba(155, 68, 68, 0.95);
+  }
+ 

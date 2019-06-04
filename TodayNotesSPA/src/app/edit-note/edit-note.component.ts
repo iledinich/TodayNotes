@@ -34,7 +34,7 @@ export class EditNoteComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe(data => {
       if (data['note'] === undefined) {
-        this.note = { id: 0, title: '', text: '', daysAgo: 0, color: this.defaultColor };
+        this.note = { id: 0, title: '', text: '', created: new Date(), color: this.defaultColor };
         this.newMode = true;
       } else {
         this.note = data['note'];

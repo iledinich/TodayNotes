@@ -68,7 +68,7 @@ namespace TodayNotesAPI.Controllers
             _mapper.Map(noteCreated, noteToRepo);
 
             noteToRepo.UserId = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value);
-            noteToRepo.Created = DateTime.Today;
+            noteToRepo.Created = DateTime.Now;
 
             _repo.Add(noteToRepo);
 

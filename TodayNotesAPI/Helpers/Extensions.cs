@@ -11,9 +11,5 @@ namespace TodayNotesAPI.Helpers
             response.Headers.Add("Access-Control-Expose-Headers", "Application-Error");
             response.Headers.Add("Access-Control-Allow-Origin", "*");
         }
-
-        public static int DaysAgoCalculator(this DateTime date){
-            return (DateTime.Today - date).Days;
-        }
     }
 }

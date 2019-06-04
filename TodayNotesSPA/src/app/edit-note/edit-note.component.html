@@ -12,7 +12,7 @@
           </div>
           <app-color-picker [noteColor]="note.color" (changeColorEmmiter)="changeColorNote($event)"></app-color-picker>
           <div class="buttons">
-              <button class="btn btn-danger float-left" (click)="deleteNote()"><i class="fa fa-trash"></i> Delete</button>
+              <button class="btn btn-danger float-left delete" (click)="deleteNote()"><i class="fa fa-trash"></i> Delete</button>
               <button class="btn btn-secondary" [routerLink]="['/home']"><i class="fa fa-long-arrow-left"></i> Back</button>
               <button (click)="addOrUpdateNote()" [disabled]="!editForm.dirty && !colorHasChanged" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
             </div>

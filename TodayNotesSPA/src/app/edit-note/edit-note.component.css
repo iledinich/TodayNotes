@@ -8,8 +8,14 @@
 textarea, input{
     resize: none;
     border: none;
+    color: black
 }
 
 button:nth-child(2){
     margin-right: 10px !important;
+}
+
+.delete{
+    background-color: rgb(161, 43, 43);
+    border-color: rgb(161, 43, 43);
 }

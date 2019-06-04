@@ -25,6 +25,7 @@ import { NoteEditResolver } from './_resolvers/edit.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { ColorPickerComponent } from './color-picker/color-picker.component';
 import { AddButtonComponent } from './add-button/add-button.component';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 
 export function tokenGetter() {
@@ -42,7 +43,8 @@ export function tokenGetter() {
       NoteCardComponent,
       ColorPickerComponent,
       EditNoteComponent,
-      AddButtonComponent
+      AddButtonComponent,
+      TimeAgoPipe
    ],
    imports: [
       BrowserModule,

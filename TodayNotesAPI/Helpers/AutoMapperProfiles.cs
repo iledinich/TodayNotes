@@ -7,10 +7,7 @@ namespace TodayNotesAPI.Helpers
     public class AutoMapperProfiles : Profile
     {
         public AutoMapperProfiles(){
-            CreateMap<Note, NoteForReturn>(MemberList.None)
-                .ForMember(dest => dest.DaysAgo, opt =>{
-                    opt.MapFrom(source => source.Created.DaysAgoCalculator());
-                });
+            CreateMap<Note, NoteForReturn>(MemberList.None);
 
             CreateMap<NoteForUpdateDTO,Note>();
         }
