@@ -14,6 +14,7 @@ export class EditNoteComponent implements OnInit {
 
   @ViewChild('editForm') editForm: NgForm;
   note: Note;
+  colorHasChanged = false;
   constructor(private route: ActivatedRoute, private router: Router,
      private noteService: NoteService, private alertify: AlertifyService) { }
 
@@ -35,13 +36,24 @@ export class EditNoteComponent implements OnInit {
       this.router.navigate(['/home']);
       this.alertify.success('Note updated successfully');
       this.editForm.reset(this.note);
+      this.colorHasChanged = false;
     }, error => {
       this.alertify.error(error);
     });
   }
 
-  cancel() {
+  deleteNote() {
+    this.noteService.deleteNote(this.note.id).subscribe(next => {
+      this.router.navigate(['/home']);
+      this.alertify.success('Note deleted successfully');
+    }, error => {
+      this.alertify.error(error);
+    });
+  }
 
+  changeColorNote(newColor: string) {
+    this.note.color = newColor;
+    this.colorHasChanged = true;
   }
 
 }

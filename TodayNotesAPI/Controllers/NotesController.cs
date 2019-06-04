@@ -32,15 +32,10 @@ namespace TodayNotesAPI.Controllers
             return Ok(noteForReturn);
         }
 
-        [HttpGet("notes/{idUser}")]
-        public async Task<IActionResult> GetNotes(int idUser)
+        [HttpGet]
+        public async Task<IActionResult> GetNotes()
         {
-            if (idUser != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
-            {
-                return Unauthorized();
-            }
-
-            var notes = await _repo.GetNotes(idUser);
+            var notes = await _repo.GetNotes(int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value));
             var notesForReturn = _mapper.Map<IEnumerable<NoteForReturn>>(notes);
             return Ok(notesForReturn);
         }
@@ -64,6 +59,23 @@ namespace TodayNotesAPI.Controllers
                 return NoContent();
 
             throw new Exception($"Updating note {idNote} failed on save");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteNote(int id){
+            //I need to check if the user have permisions to modify that note.
+            var noteFromRepo = await _repo.GetNote(id);
+
+            if (noteFromRepo.UserId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+                return Unauthorized();
+
+            _repo.Delete(noteFromRepo);
+
+            if (await _repo.SaveAll())
+                return Ok();
+
+            return BadRequest("Failed to delete the photo");
+
         }
 
     }

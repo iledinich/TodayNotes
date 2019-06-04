@@ -1,3 +1,7 @@
-<p>
-  color-picker works!
-</p>
+<div class="dot-container" [style.background-color]="selectedColor">
+    <span *ngFor="let color of colors" (click)="changeColor(color)"
+    [style.background-color]="color"
+    [class.selectedColor]="color == selectedColor" class="dot">
+    </span>
+</div>
+

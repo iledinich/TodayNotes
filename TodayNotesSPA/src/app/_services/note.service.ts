@@ -12,8 +12,8 @@ export class NoteService {
 baseUrl = environment.apiUrl;
 constructor(private http: HttpClient) { }
 
-  getNotes(userId: number): Observable<Note[]> {
-    return this.http.get<Note[]>(this.baseUrl + 'notes/notes/' + userId);
+  getNotes(): Observable<Note[]> {
+    return this.http.get<Note[]>(this.baseUrl + 'notes');
   }
 
   getNote(noteId: number): Observable<Note> {
@@ -22,6 +22,10 @@ constructor(private http: HttpClient) { }
 
   updateNote(noteId: number, note: Note) {
     return this.http.put<Note>(this.baseUrl + 'notes/' + noteId, note);
+  }
+
+  deleteNote(noteId: number) {
+    return this.http.delete<Note>(this.baseUrl + 'notes/' + noteId);
   }
 
 }

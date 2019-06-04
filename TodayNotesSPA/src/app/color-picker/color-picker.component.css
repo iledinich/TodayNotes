@@ -1,0 +1,21 @@
+.dot-container{
+    display: flex;
+    border: 1px solid #ced4da;
+    padding: 5px;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+.dot {
+    height: 35px;
+    width: 35px;
+    background-color: grey;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
+
+  }
+
+.selectedColor{
+    border: 2px solid black;
+}

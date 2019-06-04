@@ -13,7 +13,7 @@ export class NotesResolver implements Resolve<Note[]> {
         private alertify: AlertifyService, private authService: AuthService) {}
 
     resolve(route: ActivatedRouteSnapshot): Observable<Note[]> {
-        return this.noteService.getNotes(this.authService.decodedToken.nameid).pipe(
+        return this.noteService.getNotes().pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
                 this.router.navigate(['/home']);

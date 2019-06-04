@@ -1,4 +1,4 @@
-  <div class="card-body" [routerLink]="['/edit/', note.id]" >
+  <div class="card-body" [style.background-color]="note.color" [routerLink]="['/edit/', note.id]" >
     <h5 class="card-title">{{note.title}}</h5>
     <p class="card-text">{{note.text}}</p>
     <p class="card-date">{{note.daysAgo}} days ago</p>
