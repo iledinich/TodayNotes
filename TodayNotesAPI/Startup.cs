@@ -59,7 +59,7 @@ namespace TodayNotesAPI
         {
             services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IAuthRepository, AuthRepository>();
-            services.BuildServiceProvider().GetService<DataContext>().Database.Migrate();
+            // services.BuildServiceProvider().GetService<DataContext>().Database.Migrate();
             services.AddCors();
             services.AddTransient<Seed>();
             services.AddAutoMapper(typeof(Startup));
