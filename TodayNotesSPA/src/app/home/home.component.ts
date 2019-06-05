@@ -26,7 +26,14 @@ export class HomeComponent implements OnInit {
 
   filter(word: string) {
     this.filteredNotes = this.notes.filter(n => {
-      return n.title.toLocaleLowerCase().includes(word.toLocaleLowerCase());
+      let finded = false;
+      if (n.title != null) {
+        finded = n.title.toLocaleLowerCase().includes(word.toLocaleLowerCase());
+      }
+      if (finded === false && n.text != null) {
+        finded = n.text.toLocaleLowerCase().includes(word.toLocaleLowerCase());
+      }
+      return finded;
     });
   }
 }

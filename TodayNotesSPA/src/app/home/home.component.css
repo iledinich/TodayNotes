@@ -2,18 +2,19 @@
     .note-container{
         display: flex;
         flex-direction: row;
-        align-items: flex-start;
         justify-content: flex-start;
+        align-items: flex-start;
         flex-wrap: wrap;
-        
+        padding-left: 20px;
         width: 100%;
+        overflow-y: scroll;
     }
 }
 
+
 .card{
-    flex-basis: 30%;
+    flex-basis: 31%;
     margin: 10px;
     background-color: transparent;
 
 }
-

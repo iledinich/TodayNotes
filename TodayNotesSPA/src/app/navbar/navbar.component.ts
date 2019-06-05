@@ -29,6 +29,6 @@ export class NavbarComponent implements OnInit {
   }
 
   settings() {
-    this.alertify.message('settings is under develop');
+    this.alertify.message('Settings is under development');
   }
 }
