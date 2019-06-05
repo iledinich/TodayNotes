@@ -592,6 +592,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _guards_prevent_unsaved_changes_guard__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./_guards/prevent-unsaved-changes.guard */ "./src/app/_guards/prevent-unsaved-changes.guard.ts");
 /* harmony import */ var _color_picker_color_picker_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./color-picker/color-picker.component */ "./src/app/color-picker/color-picker.component.ts");
 /* harmony import */ var _add_button_add_button_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./add-button/add-button.component */ "./src/app/add-button/add-button.component.ts");
+/* harmony import */ var time_ago_pipe__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! time-ago-pipe */ "./node_modules/time-ago-pipe/esm5/time-ago-pipe.js");
+/* harmony import */ var _search_bar_search_bar_component__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./search-bar/search-bar.component */ "./src/app/search-bar/search-bar.component.ts");
+
+
 
 
 
@@ -636,7 +640,9 @@ var AppModule = /** @class */ (function () {
                 _note_card_note_card_component__WEBPACK_IMPORTED_MODULE_17__["NoteCardComponent"],
                 _color_picker_color_picker_component__WEBPACK_IMPORTED_MODULE_24__["ColorPickerComponent"],
                 _edit_note_edit_note_component__WEBPACK_IMPORTED_MODULE_21__["EditNoteComponent"],
-                _add_button_add_button_component__WEBPACK_IMPORTED_MODULE_25__["AddButtonComponent"]
+                _add_button_add_button_component__WEBPACK_IMPORTED_MODULE_25__["AddButtonComponent"],
+                time_ago_pipe__WEBPACK_IMPORTED_MODULE_26__["TimeAgoPipe"],
+                _search_bar_search_bar_component__WEBPACK_IMPORTED_MODULE_27__["SearchBarComponent"]
             ],
             imports: [
                 _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
@@ -753,7 +759,7 @@ var ColorPickerComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".buttons{\n    text-align: right;\n}\n\n.buttons button{\n    margin: 0px;\n}\n\ntextarea, input{\n    resize: none;\n    border: none;\n}\n\nbutton:nth-child(2){\n    margin-right: 10px !important;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZWRpdC1ub3RlL2VkaXQtbm90ZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksaUJBQWlCO0FBQ3JCOztBQUVBO0lBQ0ksV0FBVztBQUNmOztBQUNBO0lBQ0ksWUFBWTtJQUNaLFlBQVk7QUFDaEI7O0FBRUE7SUFDSSw2QkFBNkI7QUFDakMiLCJmaWxlIjoic3JjL2FwcC9lZGl0LW5vdGUvZWRpdC1ub3RlLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYnV0dG9uc3tcbiAgICB0ZXh0LWFsaWduOiByaWdodDtcbn1cblxuLmJ1dHRvbnMgYnV0dG9ue1xuICAgIG1hcmdpbjogMHB4O1xufVxudGV4dGFyZWEsIGlucHV0e1xuICAgIHJlc2l6ZTogbm9uZTtcbiAgICBib3JkZXI6IG5vbmU7XG59XG5cbmJ1dHRvbjpudGgtY2hpbGQoMil7XG4gICAgbWFyZ2luLXJpZ2h0OiAxMHB4ICFpbXBvcnRhbnQ7XG59XG4iXX0= */"
+module.exports = ".buttons{\n    text-align: right;\n}\n\n.buttons button{\n    margin: 0px;\n}\n\ntextarea, input{\n    resize: none;\n    border: none;\n    color: black\n}\n\nbutton:nth-child(2){\n    margin-right: 10px !important;\n}\n\n.delete{\n    background-color: rgb(161, 43, 43);\n    border-color: rgb(161, 43, 43);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvZWRpdC1ub3RlL2VkaXQtbm90ZS5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksaUJBQWlCO0FBQ3JCOztBQUVBO0lBQ0ksV0FBVztBQUNmOztBQUNBO0lBQ0ksWUFBWTtJQUNaLFlBQVk7SUFDWjtBQUNKOztBQUVBO0lBQ0ksNkJBQTZCO0FBQ2pDOztBQUVBO0lBQ0ksa0NBQWtDO0lBQ2xDLDhCQUE4QjtBQUNsQyIsImZpbGUiOiJzcmMvYXBwL2VkaXQtbm90ZS9lZGl0LW5vdGUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5idXR0b25ze1xuICAgIHRleHQtYWxpZ246IHJpZ2h0O1xufVxuXG4uYnV0dG9ucyBidXR0b257XG4gICAgbWFyZ2luOiAwcHg7XG59XG50ZXh0YXJlYSwgaW5wdXR7XG4gICAgcmVzaXplOiBub25lO1xuICAgIGJvcmRlcjogbm9uZTtcbiAgICBjb2xvcjogYmxhY2tcbn1cblxuYnV0dG9uOm50aC1jaGlsZCgyKXtcbiAgICBtYXJnaW4tcmlnaHQ6IDEwcHggIWltcG9ydGFudDtcbn1cblxuLmRlbGV0ZXtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2IoMTYxLCA0MywgNDMpO1xuICAgIGJvcmRlci1jb2xvcjogcmdiKDE2MSwgNDMsIDQzKTtcbn0iXX0= */"
 
 /***/ }),
 
@@ -764,7 +770,7 @@ module.exports = ".buttons{\n    text-align: right;\n}\n\n.buttons button{\n    
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container-fluid\">\n    <div class=\"row\">\n      <div class=\"col-xs-0 col-sm-1 p-0\"></div>\n      <div class=\"col-xs-10 col-sm-10 p-3\">\n        <form #editForm=\"ngForm\" id=\"editForm\">\n          <div class=\"form-group\">\n            <input type=\"text\" class=\"form-control\" [style.background-color]=\"note.color\" [(ngModel)]=\"note.title\" id=\"title\" name=\"title\" aria-describedby=\"title\" placeholder=\"Title\">\n          </div>\n          <div class=\"form-group\">\n            <textarea type=\"text\" class=\"form-control\" [style.background-color]=\"note.color\" [(ngModel)]=\"note.text\" name=\"text\" id=\"text\" placeholder=\"Put the note content here...\"\n              rows=\"10\"></textarea>\n          </div>\n          <app-color-picker [noteColor]=\"note.color\" (changeColorEmmiter)=\"changeColorNote($event)\"></app-color-picker>\n          <div class=\"buttons\">\n              <button class=\"btn btn-danger float-left\" (click)=\"deleteNote()\"><i class=\"fa fa-trash\"></i> Delete</button>\n              <button class=\"btn btn-secondary\" [routerLink]=\"['/home']\"><i class=\"fa fa-long-arrow-left\"></i> Back</button>\n              <button (click)=\"addOrUpdateNote()\" [disabled]=\"!editForm.dirty && !colorHasChanged\" class=\"btn btn-primary\"><i class=\"fa fa-save\"></i> Save</button>\n            </div>\n        </form>\n      </div>\n      <div class=\"col-xs-10 col-sm-1 p-0\"></div>\n    </div>\n  </div>"
+module.exports = "<div class=\"container-fluid\">\n    <div class=\"row\">\n      <div class=\"col-xs-0 col-sm-1 p-0\"></div>\n      <div class=\"col-xs-10 col-sm-10 p-3\">\n        <form #editForm=\"ngForm\" id=\"editForm\">\n          <div class=\"form-group\">\n            <input type=\"text\" class=\"form-control\" [style.background-color]=\"note.color\" [(ngModel)]=\"note.title\" id=\"title\" name=\"title\" aria-describedby=\"title\" placeholder=\"Title\">\n          </div>\n          <div class=\"form-group\">\n            <textarea type=\"text\" class=\"form-control\" [style.background-color]=\"note.color\" [(ngModel)]=\"note.text\" name=\"text\" id=\"text\" placeholder=\"Put the note content here...\"\n              rows=\"10\"></textarea>\n          </div>\n          <app-color-picker [noteColor]=\"note.color\" (changeColorEmmiter)=\"changeColorNote($event)\"></app-color-picker>\n          <div class=\"buttons\">\n              <button class=\"btn btn-danger float-left delete\" (click)=\"deleteNote()\"><i class=\"fa fa-trash\"></i> Delete</button>\n              <button class=\"btn btn-secondary\" [routerLink]=\"['/home']\"><i class=\"fa fa-long-arrow-left\"></i> Back</button>\n              <button (click)=\"addOrUpdateNote()\" [disabled]=\"!editForm.dirty && !colorHasChanged\" class=\"btn btn-primary\"><i class=\"fa fa-save\"></i> Save</button>\n            </div>\n        </form>\n      </div>\n      <div class=\"col-xs-10 col-sm-1 p-0\"></div>\n    </div>\n  </div>"
 
 /***/ }),
 
@@ -811,7 +817,7 @@ var EditNoteComponent = /** @class */ (function () {
         var _this = this;
         this.route.data.subscribe(function (data) {
             if (data['note'] === undefined) {
-                _this.note = { id: 0, title: '', text: '', daysAgo: 0, color: _this.defaultColor };
+                _this.note = { id: 0, title: '', text: '', created: new Date(), color: _this.defaultColor };
                 _this.newMode = true;
             }
             else {
@@ -901,7 +907,7 @@ module.exports = "@media (min-width: 468px){\n    .note-container{\n        disp
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"note-container\">\n        <app-note-card class=\"card\" *ngFor=\"let note of notes\" [note]=\"note\"></app-note-card>\n</div>\n<app-add-button></app-add-button>\n\n"
+module.exports = "<app-search-bar (searchedWordEmitter)=\"filter($event)\" ></app-search-bar>\n<div class=\"note-container\">\n        <app-note-card class=\"card\" *ngFor=\"let note of filteredNotes\" [note]=\"note\"></app-note-card>\n</div>\n<app-add-button></app-add-button>\n\n"
 
 /***/ }),
 
@@ -935,6 +941,12 @@ var HomeComponent = /** @class */ (function () {
         var _this = this;
         this.route.data.subscribe(function (data) {
             _this.notes = data['notes'];
+            _this.filteredNotes = _this.notes;
+        });
+    };
+    HomeComponent.prototype.filter = function (word) {
+        this.filteredNotes = this.notes.filter(function (n) {
+            return n.title.toLocaleLowerCase().includes(word.toLocaleLowerCase());
         });
     };
     HomeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1048,7 +1060,7 @@ module.exports = ".card-date{\n    font-size: 13px;\n    color: black;\n    text
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "  <div class=\"card-body\" [style.background-color]=\"note.color\" [routerLink]=\"['/edit/', note.id]\" >\n    <h5 class=\"card-title\">{{note.title}}</h5>\n    <p class=\"card-text\">{{note.text}}</p>\n    <p class=\"card-date\">{{note.daysAgo}} days ago</p>\n    <!-- <a href=\"#\" class=\"btn btn-primary\">Go somewhere</a> -->\n  </div>\n\n  \n"
+module.exports = "  <div class=\"card-body\" [style.background-color]=\"note.color\" [routerLink]=\"['/edit/', note.id]\" >\n    <h5 class=\"card-title\">{{note.title}}</h5>\n    <p class=\"card-text\">{{note.text}}</p>\n    <p class=\"card-date\">{{note.created | timeAgo}}</p>\n  </div>\n\n  \n"
 
 /***/ }),
 
@@ -1202,6 +1214,71 @@ var appRoutes = [
     { path: 'new', component: _edit_note_edit_note_component__WEBPACK_IMPORTED_MODULE_6__["EditNoteComponent"], canDeactivate: [_guards_prevent_unsaved_changes_guard__WEBPACK_IMPORTED_MODULE_8__["PreventUnsavedChanges"]] },
     { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
 ];
+
+
+/***/ }),
+
+/***/ "./src/app/search-bar/search-bar.component.css":
+/*!*****************************************************!*\
+  !*** ./src/app/search-bar/search-bar.component.css ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = ".search-nav{\n    padding: 10px;\n}\n\ninput {\n    width: 100%;\n    border: none;\n    padding: 8px;\n    margin-top: 8px;\n    padding-left: 10px;\n    border-radius: 10px;\n    background-color: RGB(45,45,45);\n    color: gray;\n}\n\ntextarea:focus, input:focus{\n    outline: none;\n}\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2VhcmNoLWJhci9zZWFyY2gtYmFyLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxhQUFhO0FBQ2pCOztBQUVBO0lBQ0ksV0FBVztJQUNYLFlBQVk7SUFDWixZQUFZO0lBQ1osZUFBZTtJQUNmLGtCQUFrQjtJQUNsQixtQkFBbUI7SUFDbkIsK0JBQStCO0lBQy9CLFdBQVc7QUFDZjs7QUFFQTtJQUNJLGFBQWE7QUFDakIiLCJmaWxlIjoic3JjL2FwcC9zZWFyY2gtYmFyL3NlYXJjaC1iYXIuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5zZWFyY2gtbmF2e1xuICAgIHBhZGRpbmc6IDEwcHg7XG59XG5cbmlucHV0IHtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBib3JkZXI6IG5vbmU7XG4gICAgcGFkZGluZzogOHB4O1xuICAgIG1hcmdpbi10b3A6IDhweDtcbiAgICBwYWRkaW5nLWxlZnQ6IDEwcHg7XG4gICAgYm9yZGVyLXJhZGl1czogMTBweDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiBSR0IoNDUsNDUsNDUpO1xuICAgIGNvbG9yOiBncmF5O1xufVxuXG50ZXh0YXJlYTpmb2N1cywgaW5wdXQ6Zm9jdXN7XG4gICAgb3V0bGluZTogbm9uZTtcbn1cbiJdfQ== */"
+
+/***/ }),
+
+/***/ "./src/app/search-bar/search-bar.component.html":
+/*!******************************************************!*\
+  !*** ./src/app/search-bar/search-bar.component.html ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"search-nav\">\n    <input type=\"text\" [ngModel]=\"searchWord\" (ngModelChange)=\"search($event)\" placeholder=\"Search by title or content...\">\n</div>\n"
+
+/***/ }),
+
+/***/ "./src/app/search-bar/search-bar.component.ts":
+/*!****************************************************!*\
+  !*** ./src/app/search-bar/search-bar.component.ts ***!
+  \****************************************************/
+/*! exports provided: SearchBarComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SearchBarComponent", function() { return SearchBarComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+
+
+var SearchBarComponent = /** @class */ (function () {
+    function SearchBarComponent() {
+        this.searchedWordEmitter = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+    }
+    SearchBarComponent.prototype.ngOnInit = function () {
+    };
+    SearchBarComponent.prototype.search = function (newValue) {
+        this.searchWord = newValue;
+        this.searchedWordEmitter.emit(newValue);
+    };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+    ], SearchBarComponent.prototype, "searchedWordEmitter", void 0);
+    SearchBarComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+            selector: 'app-search-bar',
+            template: __webpack_require__(/*! ./search-bar.component.html */ "./src/app/search-bar/search-bar.component.html"),
+            styles: [__webpack_require__(/*! ./search-bar.component.css */ "./src/app/search-bar/search-bar.component.css")]
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+    ], SearchBarComponent);
+    return SearchBarComponent;
+}());
+
 
 
 /***/ }),
