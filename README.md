@@ -28,4 +28,3 @@ To publish the WebAPP I chose Azure, creating an SQL server and the own App ther
 *	Porting to android/iOS using Native Script
 *	Google and Facebook login
 
-**Running application: https://today-notes-app.azurewebsites.net**
