@@ -1,4 +1,5 @@
 {
     "appService.defaultWebAppToDeploy": "/subscriptions/b262a1e3-6d6e-4cb3-b60b-4acac28a5df7/resourceGroups/todaynotes/providers/Microsoft.Web/sites/todaynotes",
-    "appService.deploySubpath": ""
+    "appService.deploySubpath": "TodayNotesAPI/bin/Release/netcoreapp3.1/publish",
+    "appService.preDeployTask": "publish-release"
 }
