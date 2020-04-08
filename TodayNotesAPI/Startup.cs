@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using TodayNotesAPI.Helpers;
 using AutoMapper;
+using Microsoft.Extensions.Hosting;
 
 namespace TodayNotesAPI
 {
@@ -32,34 +33,20 @@ namespace TodayNotesAPI
 
         public IConfiguration Configuration { get; }
 
+        public void ConfigureProductionServices(IServiceCollection services)
+        {
+            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            ConfigureServices(services);
+        }
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IAuthRepository, AuthRepository>();
-            services.AddCors();
-            services.AddTransient<Seed>();
-            services.AddAutoMapper(typeof(Startup));
-            services.AddScoped<INotesRepository, NotesRepository>();
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options =>
-                {
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-                            .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
-                        ValidateIssuer = false,
-                        ValidateAudience = false
-                    };
-                });
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            ConfigureServices(services);
         }
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IAuthRepository, AuthRepository>();
-            // services.BuildServiceProvider().GetService<DataContext>().Database.Migrate();
             services.AddCors();
             services.AddTransient<Seed>();
             services.AddAutoMapper(typeof(Startup));
@@ -76,11 +63,12 @@ namespace TodayNotesAPI
                         ValidateAudience = false
                     };
                 });
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, Seed seeder)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Seed seeder)
         {
             if (env.IsDevelopment())
             {
@@ -104,18 +92,20 @@ namespace TodayNotesAPI
                 });
             }
 
-            seeder.SeedUsers();
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            app.UseRouting();
+
             app.UseAuthentication();
-            // app.UseHttpsRedirection();
+            app.UseAuthorization();
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            app.UseMvc(routes =>
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapSpaFallbackRoute(
-                    name: "spa-fallback",
-                    defaults: new { controller = "Fallback", action = "Index" }
-                );
+                endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
             });
         }
     }
