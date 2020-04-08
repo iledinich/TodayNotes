@@ -29,11 +29,13 @@ namespace TodayNotesAPI.Controllers
         public async Task<IActionResult> Register(UserForRegisterDTO userForRegister)
         {
             userForRegister.UserName = userForRegister.UserName.ToLower();
-            if(await _repo.UserExists(userForRegister.UserName)){
+            if (await _repo.UserExists(userForRegister.UserName))
+            {
                 return BadRequest("Username already exists!");
             }
 
-            User user = new User {
+            User user = new User
+            {
                 UserName = userForRegister.UserName
             };
 
@@ -47,7 +49,7 @@ namespace TodayNotesAPI.Controllers
         {
 
 
-            var userFromRepo = await _repo.Login(userLoginDto.UserName, userLoginDto.Password);
+            var userFromRepo = await _repo.Login(userLoginDto.UserName.ToLower(), userLoginDto.Password);
 
             if (userFromRepo == null)
                 return Unauthorized();
@@ -74,7 +76,8 @@ namespace TodayNotesAPI.Controllers
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return Ok(new {
+            return Ok(new
+            {
                 token = tokenHandler.WriteToken(token)
             });
         }
