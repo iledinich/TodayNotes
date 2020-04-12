@@ -44,23 +44,6 @@ namespace TodayNotesAPI.Migrations.SqliteMigrations
                     b.ToTable("Notes");
                 });
 
-            modelBuilder.Entity("TodayNotesAPI.Models.Post", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Text")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Posts");
-                });
-
             modelBuilder.Entity("TodayNotesAPI.Models.User", b =>
                 {
                     b.Property<int>("Id")
