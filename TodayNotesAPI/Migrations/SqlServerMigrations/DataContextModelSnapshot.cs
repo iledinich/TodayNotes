@@ -48,6 +48,24 @@ namespace TodayNotesAPI.Migrations.SqlServerMigrations
                     b.ToTable("Notes");
                 });
 
+            modelBuilder.Entity("TodayNotesAPI.Models.Post", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Text")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Posts");
+                });
+
             modelBuilder.Entity("TodayNotesAPI.Models.User", b =>
                 {
                     b.Property<int>("Id")

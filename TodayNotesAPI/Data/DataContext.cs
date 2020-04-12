@@ -20,6 +20,7 @@ namespace TodayNotesAPI.Data
         }
         public DbSet<Note> Notes { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Post> Posts { get; set; }
 
     }
 }

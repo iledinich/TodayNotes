@@ -5,6 +5,22 @@ as Dotnet Core framework, Angular, Entity Framework, WebAPI.
 Developing from the start to production environment in the cloud.
 It is an application to create simple notes, you can change the color and search notes using the search bar.
 
+### Setup
+
+To install in a local + azure environment I used 2 dbcontext to manage multiple DB (Sqlite / SQL Server)
+
+Before dotnet run use:
+
+export ASPNETCORE_ENVIRONMENT=production
+dotnet ef migrations add <MigrationName> --context DataContext --output-dir Migrations/SqlServerMigrations
+
+export ASPNETCORE_ENVIRONMENT=development
+dotnet ef migrations add <MigrationName> --context SqliteDataContext --output-dir Migrations/SqliteMigrations
+
+The Startup class will run the migrations automatically depending on the environment.
+dataContext.Database.Migrate();
+
+
 ### Backend
 It consist in a WebAPI that was developed using dotnet core framework, the database was created
 using Entity Framework code first and managed by migrations.
@@ -23,8 +39,9 @@ To fit the classes between the API and angular services. For the backend I used 
 
 To publish the WebAPP I chose Azure, creating an SQL server and the own App there. Its connected to GitHub to make a continuous integration.
 
-### Future features
+### Future features to implement
 *	Identity Core
-*	Porting to android/iOS using Native Script
 *	Google and Facebook login
+*	CI/CD
+
 
