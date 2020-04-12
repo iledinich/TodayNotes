@@ -35,12 +35,12 @@ namespace TodayNotesAPI
 
         public void ConfigureProductionServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>();
             ConfigureServices(services);
         }
         public void ConfigureDevelopmentServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext, SqliteDataContext>();
             ConfigureServices(services);
         }
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -68,7 +68,7 @@ namespace TodayNotesAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Seed seeder)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Seed seeder, DataContext dataContext)
         {
             if (env.IsDevelopment())
             {
@@ -91,6 +91,9 @@ namespace TodayNotesAPI
                     });
                 });
             }
+
+
+            dataContext.Database.Migrate();
 
             app.UseRouting();
 
