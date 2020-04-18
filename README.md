@@ -40,8 +40,8 @@ To fit the classes between the API and angular services. For the backend I used 
 To publish the WebAPP I chose Azure, creating an SQL server and the own App there. Its connected to GitHub to make a continuous integration.
 
 ### Future features to implement
-*	Identity Core
-*	Google and Facebook login
+*   Docker SQL Express for Development enviroment
+*   Seeds for SQL Server
 *	CI/CD
-
-
+*	Auth0 Login
+*   Angular Animations
