@@ -3,8 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TodayNotesAPI.Data;
+using TodayNotesAPI.Persistence;
 
 namespace TodayNotesAPI.Migrations.SqliteMigrations
 {

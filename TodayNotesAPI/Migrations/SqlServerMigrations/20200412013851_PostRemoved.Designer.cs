@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TodayNotesAPI.Data;
+using TodayNotesAPI.Persistence;
 
 namespace TodayNotesAPI.Migrations.SqlServerMigrations
 {

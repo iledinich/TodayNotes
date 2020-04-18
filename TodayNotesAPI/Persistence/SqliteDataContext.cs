@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace TodayNotesAPI.Data
+namespace TodayNotesAPI.Persistence
 {
     public class SqliteDataContext : DataContext
     {

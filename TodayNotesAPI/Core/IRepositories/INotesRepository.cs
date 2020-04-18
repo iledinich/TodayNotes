@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using TodayNotesAPI.Models;
+using TodayNotesAPI.Core.Models;
 
-namespace TodayNotesAPI.Data
+namespace TodayNotesAPI.Core.IRepositories
 {
     public interface INotesRepository
     {

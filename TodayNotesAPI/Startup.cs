@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
-using TodayNotesAPI.Data;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -21,6 +13,9 @@ using Microsoft.AspNetCore.Http;
 using TodayNotesAPI.Helpers;
 using AutoMapper;
 using Microsoft.Extensions.Hosting;
+using TodayNotesAPI.Persistence;
+using TodayNotesAPI.Core.IRepositories;
+using TodayNotesAPI.Persistence.Repositories;
 
 namespace TodayNotesAPI
 {
@@ -47,8 +42,8 @@ namespace TodayNotesAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddCors();
-            services.AddTransient<Seed>();
             services.AddAutoMapper(typeof(Startup));
             services.AddScoped<INotesRepository, NotesRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -68,7 +63,7 @@ namespace TodayNotesAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Seed seeder, DataContext dataContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, DataContext dataContext)
         {
             if (env.IsDevelopment())
             {

@@ -1,8 +1,8 @@
 using System;
 
-namespace TodayNotesAPI.DTOs
+namespace TodayNotesAPI.Controllers.Resources
 {
-    public class NoteForReturn
+    public class NoteResource
     {
         public int Id { get; set; }
         public string Title { get; set; }

@@ -1,15 +1,16 @@
 using AutoMapper;
-using TodayNotesAPI.DTOs;
-using TodayNotesAPI.Models;
+using TodayNotesAPI.Controllers.Resources;
+using TodayNotesAPI.Core.Models;
 
 namespace TodayNotesAPI.Helpers
 {
     public class AutoMapperProfiles : Profile
     {
-        public AutoMapperProfiles(){
-            CreateMap<Note, NoteForReturn>(MemberList.None);
+        public AutoMapperProfiles()
+        {
+            CreateMap<Note, NoteResource>(MemberList.None);
 
-            CreateMap<NoteForUpdateDTO,Note>();
+            CreateMap<SaveNoteResource, Note>();
         }
     }
 }

@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using TodayNotesAPI.Data;
-using TodayNotesAPI.DTOs;
-using TodayNotesAPI.Models;
+using TodayNotesAPI.Controllers.Resources;
+using TodayNotesAPI.Core.IRepositories;
+using TodayNotesAPI.Core.Models;
 
 namespace TodayNotesAPI.Controllers
 {
@@ -28,20 +28,20 @@ namespace TodayNotesAPI.Controllers
         public async Task<IActionResult> GetNote(int idNote)
         {
             var note = await _repo.GetNote(idNote);
-            var noteForReturn = _mapper.Map<NoteForReturn>(note);
-            return Ok(noteForReturn);
+            var noteResource = _mapper.Map<NoteResource>(note);
+            return Ok(noteResource);
         }
 
         [HttpGet]
         public async Task<IActionResult> GetNotes()
         {
             var notes = await _repo.GetNotes(int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value));
-            var notesForReturn = _mapper.Map<IEnumerable<NoteForReturn>>(notes);
+            var notesForReturn = _mapper.Map<IEnumerable<NoteResource>>(notes);
             return Ok(notesForReturn);
         }
 
         [HttpPut("{idNote}")]
-        public async Task<IActionResult> UpdateNote(int idNote, NoteForUpdateDTO noteToUpdate)
+        public async Task<IActionResult> UpdateNote(int idNote, SaveNoteResource noteToUpdate)
         {
 
             //I need to check if the user have permisions to modify that note.
@@ -62,8 +62,8 @@ namespace TodayNotesAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddNote(NoteForUpdateDTO noteCreated)
-        {            
+        public async Task<IActionResult> AddNote(SaveNoteResource noteCreated)
+        {
             Note noteToRepo = new Note();
             _mapper.Map(noteCreated, noteToRepo);
 
@@ -79,7 +79,8 @@ namespace TodayNotesAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteNote(int id){
+        public async Task<IActionResult> DeleteNote(int id)
+        {
             //I need to check if the user have permisions to modify that note.
             var noteFromRepo = await _repo.GetNote(id);
 

@@ -1,6 +1,6 @@
-namespace TodayNotesAPI.DTOs
+namespace TodayNotesAPI.Controllers.Resources
 {
-    public class NoteForUpdateDTO
+    public class SaveNoteResource
     {
         public string Title { get; set; }
         public string Text { get; set; }

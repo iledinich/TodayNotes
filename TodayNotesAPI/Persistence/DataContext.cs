@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using TodayNotesAPI.Models;
+using TodayNotesAPI.Core.Models;
 
-namespace TodayNotesAPI.Data
+namespace TodayNotesAPI.Persistence
 {
     public class DataContext : DbContext
     {

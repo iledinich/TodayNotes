@@ -3,11 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace TodayNotesAPI.Controllers
 {
-public class Fallback : Controller
+    public class FallbackController : Controller
     {
         public IActionResult Index()
         {
-            return PhysicalFile(Path.Combine(Directory.GetCurrentDirectory(), 
+            return PhysicalFile(Path.Combine(Directory.GetCurrentDirectory(),
                 "wwwroot", "index.html"), "text/HTML");
         }
     }

@@ -1,13 +1,12 @@
-using System;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using TodayNotesAPI.Controllers;
-using TodayNotesAPI.Data;
-using TodayNotesAPI.DTOs;
+using TodayNotesAPI.Controllers.Resources;
+using TodayNotesAPI.Core.IRepositories;
+using TodayNotesAPI.Core.Models;
 using TodayNotesAPI.Helpers;
-using TodayNotesAPI.Models;
 using Xunit;
 
 namespace TodayNotesAPI.Test
@@ -35,7 +34,7 @@ namespace TodayNotesAPI.Test
 
             // Assert
             Assert.NotNull(actionResult);
-            Assert.Equal(42, ((NoteForReturn)actionResult.Value).Id);
+            Assert.Equal(42, ((NoteResource)actionResult.Value).Id);
 
         }
 
@@ -60,7 +59,7 @@ namespace TodayNotesAPI.Test
 
             // Assert
             Assert.NotNull(actionResult);
-            Assert.Null((NoteForReturn)actionResult.Value);
+            Assert.Null((NoteResource)actionResult.Value);
         }
 
     }

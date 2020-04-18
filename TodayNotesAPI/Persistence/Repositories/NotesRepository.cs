@@ -1,19 +1,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using TodayNotesAPI.DTOs;
-using TodayNotesAPI.Models;
+using TodayNotesAPI.Core.IRepositories;
+using TodayNotesAPI.Core.Models;
 
-namespace TodayNotesAPI.Data
+namespace TodayNotesAPI.Persistence.Repositories
 {
     public class NotesRepository : INotesRepository
     {
         private readonly DataContext _context;
+        private readonly IUnitOfWork uow;
 
-        public NotesRepository(DataContext context)
+        public NotesRepository(DataContext context, IUnitOfWork uow)
         {
+            this.uow = uow;
             _context = context;
         }
         public void Add(Note note)
@@ -28,17 +29,17 @@ namespace TodayNotesAPI.Data
 
         public async Task<Note> GetNote(int id)
         {
-            return await _context.Notes.FirstOrDefaultAsync(n=>n.Id == id);
+            return await _context.Notes.FirstOrDefaultAsync(n => n.Id == id);
         }
 
         public async Task<IEnumerable<Note>> GetNotes(int userId)
         {
-            return await _context.Notes.Where(u=>u.UserId == userId).ToListAsync();
+            return await _context.Notes.Where(u => u.UserId == userId).ToListAsync();
         }
 
         public async Task<bool> SaveAll()
         {
-            return await _context.SaveChangesAsync() > 0;
+            return await uow.CompleteAsync() > 0;
         }
     }
 }

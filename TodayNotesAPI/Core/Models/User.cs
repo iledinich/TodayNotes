@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace TodayNotesAPI.Models
+namespace TodayNotesAPI.Core.Models
 {
     public class User
     {

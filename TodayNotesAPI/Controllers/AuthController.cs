@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using TodayNotesAPI.Data;
-using TodayNotesAPI.DTOs;
-using TodayNotesAPI.Models;
+using TodayNotesAPI.Controllers.Resources;
+using TodayNotesAPI.Core.IRepositories;
+using TodayNotesAPI.Core.Models;
 
 namespace TodayNotesAPI.Controllers
 {
@@ -26,7 +26,7 @@ namespace TodayNotesAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> Register(UserForRegisterDTO userForRegister)
+        public async Task<IActionResult> Register(SaveUserResource userForRegister)
         {
             userForRegister.UserName = userForRegister.UserName.ToLower();
             if (await _repo.UserExists(userForRegister.UserName))
@@ -45,7 +45,7 @@ namespace TodayNotesAPI.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(UserForLoginDTO userLoginDto)
+        public async Task<IActionResult> Login(UserResource userLoginDto)
         {
 
 

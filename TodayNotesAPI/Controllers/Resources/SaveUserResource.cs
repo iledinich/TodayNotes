@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace TodayNotesAPI.Models
+namespace TodayNotesAPI.Controllers.Resources
 {
-    public class UserForRegisterDTO
+    public class SaveUserResource
     {
         [Required]
         public string UserName { get; set; }

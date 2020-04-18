@@ -1,25 +1,27 @@
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using TodayNotesAPI.Models;
+using TodayNotesAPI.Core.IRepositories;
+using TodayNotesAPI.Core.Models;
 
-namespace TodayNotesAPI.Data
+namespace TodayNotesAPI.Persistence.Repositories
 {
     public class AuthRepository : IAuthRepository
     {
         private readonly DataContext _context;
+        private readonly IUnitOfWork uow;
 
-        public AuthRepository(DataContext context)
+        public AuthRepository(DataContext context, IUnitOfWork uow)
         {
+            this.uow = uow;
             _context = context;
         }
-      public async Task<User> Login(string username, string password)
+        public async Task<User> Login(string username, string password)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == username);
 
             if (user == null)
                 return null;
-            
+
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
                 return null;
 
@@ -49,7 +51,7 @@ namespace TodayNotesAPI.Data
 
             await _context.Users.AddAsync(user);
 
-            await _context.SaveChangesAsync();
+            await uow.CompleteAsync();
 
             return user;
         }
@@ -61,7 +63,7 @@ namespace TodayNotesAPI.Data
                 passwordSalt = hmac.Key;
                 passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
             }
-            
+
         }
 
         public async Task<bool> UserExists(string username)
